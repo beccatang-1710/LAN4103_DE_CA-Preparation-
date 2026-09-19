@@ -48,13 +48,136 @@
         .form-table .blank { color: #ccc; font-style: italic; }
         .section-label { font-size: 0.95em; font-weight: 600; color: #1a5276; margin-top: 14px; margin-bottom: 6px; }
         .findings-highlight { background: #fdf2e9; border-left: 4px solid #e67e22; padding: 10px 14px; margin: 10px 0; font-size: 0.93em; }
+
+        /* ===== Supplementary Notes for CA (tab 8) - every rule is scoped to .sn-sheet ===== */
+        .sn-sheet {
+            /* Palette taken straight from the Word file */
+            --sn-paper: #ffffff; --sn-ink: #000000;
+            --sn-navy: #1F497D; --sn-blue: #00509E; --sn-steel: #2E75B6; --sn-grey: #595959;
+            --sn-hl-1: #FFFF00; --sn-hl-2: #00FF00; --sn-hl-3: #00FFFF; --sn-hl-4: #FF00FF; --sn-hl-5: #800080;
+            --sn-on-dark: #FFFFFF;
+            --sn-struct-bg: #F2F6FA; --sn-struct-line: #2E75B6;
+            --sn-ex-bg: #FAFAFA;     --sn-ex-line: #D3D3D3;
+            /* The Word file has a few full stops in white text with no highlight, so they are invisible.
+               Reproduced as-is. Change to #000000 to show them. */
+            --sn-ghost: #FFFFFF;
+
+            display: flex;              /* flex column: paragraph spacing adds up as in Word instead of collapsing */
+            flex-direction: column;
+            width: 100%;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: .75in .75in .9in;
+            background: var(--sn-paper);
+            color: var(--sn-ink);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            font-family: Calibri, Carlito, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+        :where(.sn-sheet) h1, :where(.sn-sheet) h2, :where(.sn-sheet) h3, :where(.sn-sheet) p { margin: 0; font-weight: normal; }
+        .sn-sheet h1 { font-size: 22pt; }
+        .sn-sheet h2 { font-size: 14pt; }
+        .sn-sheet h3 { font-size: 16pt; }
+        .sn-sheet b { font-weight: 700; }               /* fixed skeleton wording        */
+        .sn-sheet i { font-style: italic; }             /* bank of interchangeable words */
+        .sn-sheet u { text-decoration: underline; }     /* linking / sequencing words    */
+
+        .sn-h1 { background: var(--sn-hl-1); }
+        .sn-h2 { background: var(--sn-hl-2); }
+        .sn-h3 { background: var(--sn-hl-3); }
+        .sn-h4 { background: var(--sn-hl-4); }
+        .sn-h5 { background: var(--sn-hl-5); }
+        .sn-w      { color: var(--sn-on-dark); }
+        .sn-ghost  { color: var(--sn-ghost); }
+        .sn-c-navy  { color: var(--sn-navy); }
+        .sn-c-blue  { color: var(--sn-blue); }
+        .sn-c-steel { color: var(--sn-steel); }
+        .sn-c-grey  { color: var(--sn-grey); }
+        .sn-s105 { font-size: 10.5pt; } .sn-s110 { font-size: 11pt; } .sn-s120 { font-size: 12pt; }
+        .sn-s140 { font-size: 14pt; }   .sn-s160 { font-size: 16pt; } .sn-s220 { font-size: 22pt; }
+        .sn-sp-0-120 { margin: 0pt 0 6pt; }
+        .sn-sp-0-200 { margin: 0pt 0 10pt; }
+        .sn-sp-0-40 { margin: 0pt 0 2pt; }
+        .sn-sp-0-60 { margin: 0pt 0 3pt; }
+        .sn-sp-0-80 { margin: 0pt 0 4pt; }
+        .sn-sp-120-40 { margin: 6pt 0 2pt; }
+        .sn-sp-240-60 { margin: 12pt 0 3pt; }
+        .sn-sp-280-40 { margin: 14pt 0 2pt; }
+        .sn-box { width: 100%; }
+        .sn-struct   { padding: 4.5pt 7pt; border: 1pt solid var(--sn-struct-line); background: var(--sn-struct-bg); }
+        .sn-examples { padding: 4pt 6.5pt;  border: .5pt solid var(--sn-ex-line);   background: var(--sn-ex-bg); }
+        .sn-box p { overflow-wrap: anywhere; }
+        /* "Read the following examples:" uses the theme body font (Cambria) in the source */
+        .sn-label { font-family: Cambria, Caladea, Georgia, "Times New Roman", serif; font-weight: 700; line-height: 1.35; }
+
+        @media (max-width: 720px) {
+            .sn-sheet { padding: 28px 18px 40px; }
+            .sn-sheet h1 { font-size: 20pt; }
+        }
+        @media print {
+            .sn-sheet, .sn-sheet * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            body[data-tab="8"] { background: #fff; }
+            body[data-tab="8"] .header { display: none; }
+            body[data-tab="8"] .container { max-width: none; padding: 0; }
+            body[data-tab="8"] .tab-content.active { padding-top: 0; }
+            body[data-tab="8"] .sn-sheet { max-width: none; padding: 0; box-shadow: none; border-radius: 0; }
+            .sn-box { break-inside: avoid; }
+            .sn-sheet h3 { break-after: avoid; }
+        }
+
+        /* ===== CA Funding Proposal Guided Template (tab 9) - classes are prefixed gt- ===== */
+        .gt-root {
+            --gt-primary: #1a56db; --gt-primary-dark: #1e429f; --gt-card-bg: #ffffff; --gt-border: #e2e8f0;
+            --gt-text: #1e293b; --gt-text-muted: #64748b; --gt-tag-bg: #e0e7ff; --gt-tag-text: #3730a3;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--gt-text); line-height: 1.6;
+        }
+        .gt-header { background: linear-gradient(135deg, #1e429f, #2563eb); color: white; padding: 32px 28px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .gt-header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 8px; }
+        .gt-header p { font-size: 0.95rem; opacity: 0.9; }
+        .gt-toolbar { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; align-items: center; background: white; padding: 14px 20px; border-radius: 8px; border: 1px solid var(--gt-border); }
+        .gt-btn { background-color: var(--gt-primary); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: background-color 0.15s ease; display: inline-flex; align-items: center; gap: 6px; }
+        .gt-btn:hover { background-color: var(--gt-primary-dark); }
+        .gt-btn.gt-secondary { background-color: #f1f5f9; color: var(--gt-text); border: 1px solid #cbd5e1; }
+        .gt-btn.gt-secondary:hover { background-color: #e2e8f0; }
+        .gt-card { background: var(--gt-card-bg); border: 1px solid var(--gt-border); border-radius: 10px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .gt-card-header { border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+        .gt-card-title { font-size: 1.25rem; font-weight: 700; color: #0f172a; }
+        .gt-source-badge { font-size: 0.75rem; background: var(--gt-tag-bg); color: var(--gt-tag-text); padding: 4px 10px; border-radius: 9999px; font-weight: 600; }
+        .gt-prompt-block { background-color: #f8fafc; border-left: 4px solid var(--gt-primary); padding: 12px 16px; font-size: 0.875rem; color: var(--gt-text-muted); margin-bottom: 16px; border-radius: 0 6px 6px 0; }
+        .gt-template-text { font-size: 1rem; line-height: 2.2; color: #1e293b; }
+        .gt-blank-wrapper { display: inline-flex; flex-direction: column; vertical-align: middle; margin: 2px 4px; }
+        .gt-blank-input { display: inline-block; padding: 4px 10px; font-size: 0.95rem; border: 1px solid #94a3b8; border-radius: 4px; background: #ffffff; color: #0f172a; min-width: 140px; outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+        .gt-blank-input:focus { border-color: var(--gt-primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
+        .gt-blank-hint { font-size: 0.72rem; color: #047857; font-weight: 600; line-height: 1.1; margin-top: 2px; }
+        .gt-live-preview-box { background: #ffffff; border: 2px dashed #94a3b8; border-radius: 8px; padding: 20px; font-family: Georgia, serif; font-size: 1.05rem; line-height: 1.8; color: #334155; white-space: pre-wrap; }
+        .gt-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.9rem; }
+        .gt-table th, .gt-table td { border: 1px solid var(--gt-border); padding: 10px 14px; text-align: left; }
+        .gt-table th { background-color: #f1f5f9; color: #334155; font-weight: 600; }
+        @media print {
+            body[data-tab="9"] { background: #fff; }
+            body[data-tab="9"] .header { display: none; }
+            body[data-tab="9"] .container { max-width: none; padding: 0; }
+            body[data-tab="9"] .tab-content.active { padding-top: 0; }
+            body[data-tab="9"] .gt-header, body[data-tab="9"] .gt-toolbar, body[data-tab="9"] .gt-live-preview-box,
+            body[data-tab="9"] #gt-preview-section, body[data-tab="9"] .gt-btn { display: none !important; }
+            body[data-tab="9"] .gt-card { border: 1px solid #ccc; box-shadow: none; page-break-inside: avoid; margin-bottom: 20px; }
+            body[data-tab="9"] .gt-blank-input { border-bottom: 1px solid #000 !important; border-top: none; border-left: none; border-right: none; border-radius: 0; background: transparent !important; }
+        }
     </style>
+<!-- Carlito / Caladea: metric-compatible stand-ins for Calibri / Cambria, used by the Supplementary Notes tab -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&amp;display=swap">
 </head>
-<body>
+<body data-tab="0">
     <div class="header">
         <div class="header-top">
             <div>
-                <h1>LAN4103_DE_Teaching of Funding Proposals <a href="https://beccatang-1710.github.io/LAN4103_IT_Teaching-of-Funding-Proposal/" target="_blank" style="display:inline-block; background:rgba(255,255,255,0.25); border:2px solid white; color:white; padding:2px 10px; border-radius:15px; text-decoration:none; font-size:0.55em; font-weight:700; vertical-align:middle; margin-left:6px; transition:all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.25)'">IT</a></h1>
+                <h1>LAN4103_DE_Teaching of Funding Proposals <a href="https://beccatang-1710.github.io/LAN4103_IT_CA-Preparation/" target="_blank" style="display:inline-block; background:rgba(255,255,255,0.25); border:2px solid white; color:white; padding:2px 10px; border-radius:15px; text-decoration:none; font-size:0.55em; font-weight:700; vertical-align:middle; margin-left:6px; transition:all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.25)'">IT</a></h1>
                 <div style="font-size:0.85em; opacity:0.9; margin-top:2px;">Presented by Rebecca Tang</div>
                 <div class="zh-title" id="zhMainTitle">LAN4103_DE_资助提案教学</div>
             </div>
@@ -70,7 +193,9 @@
             <button class="tab-btn" onclick="switchTab(4)">Unit 4: Justification for Funding</button>
             <button class="tab-btn" onclick="switchTab(5)">Unit 5: Supplementary Information</button>
             <button class="tab-btn" onclick="switchTab(6)">Revision Package I (DE)</button>
-            <button class="tab-btn" onclick="switchTab(7)">Supplementary Notes for CA</button>
+            <button class="tab-btn" onclick="switchTab(7)">CA Assessment Overview</button>
+            <button class="tab-btn" onclick="switchTab(8)">Supplementary Notes for CA</button>
+            <button class="tab-btn" onclick="switchTab(9)">CA Funding Proposal Guided Template</button>
         </div>
     </div>
 
@@ -973,275 +1098,476 @@
             </div>
         </div>
 
-        <!-- ==================== TAB 7: Supplementary Notes for CA ==================== -->
+        <!-- ==================== TAB 7: CA Assessment Overview ==================== -->
         <div class="tab-content" id="tab7">
             <div class="card">
-                <h2>Follow the 4 Steps to Write Your 25% CA</h2>
-                <div class="zh-label">按照以下四个步骤撰写25%持续评估</div>
-                    <div style="background:#fff; border-radius:6px; padding:14px 18px; margin-top:12px; font-size:0.93em; line-height:1.7;">
-                        <p>Dear Alex,</p>
-                        <p style="margin-top:8px;">As discussed in the monthly meeting, we are planning to upgrade our theatre's lighting and sound systems aimed at enhancing the immersive experience for both performers and audiences.</p>
-                        <p style="margin-top:8px;">With an estimated cost of around HK$1,500,000, we would like to apply for the funding scheme offered by the Innovation and Technology Commission, which aims to foster the adoption of advanced arts technology in Hong Kong. Could you please help complete the funding proposal application form for my comments by next Wednesday?</p>
-                        <p style="margin-top:8px;">Thank you for your help.</p>
-                        <p style="margin-top:8px;">Regards,<br>Simon</p>
-                    </div>
+                <h2>CA Assessment Overview</h2>
+                <div class="zh-label">持续评估概览</div>
+                <p style="font-size:0.9em; color:#666; margin-top:6px;">Professional Workplace Communication: Proposal and Report Writing (LAN4103)</p>
+                <div class="zh-text">专业职场沟通：提案及报告写作（LAN4103）</div>
+            </div>
+
+            <div class="card">
+                <h2>Assessment Details</h2>
+                <div class="zh-label">评估详情</div>
+                <table class="form-table" style="margin-top:10px;">
+                    <tr><th>Module:</th><td>LAN4103 Professional Workplace Communication: Proposal & Report Writing.</td></tr>
+                    <tr><th>Assessment Type:</th><td>Continuous Assessment (25%) – Funding Proposal.</td></tr>
+                    <tr><th>Writing Task:</th><td>Complete one funding proposal application.</td></tr>
+                    <tr><th>Duration:</th><td>1 hour only.</td></tr>
+                    <tr><th>Word Count:</th><td>250–300 words.</td></tr>
+                    <tr><th>Task Objective:</th><td>Respond appropriately to a workplace funding scenario.</td></tr>
+                </table>
+                <div class="zh-text" style="margin-top:10px;">
+                    <dl class="info-grid">
+                        <dt>科目：</dt><dd>LAN4103 专业职场沟通：提案及报告写作</dd>
+                        <dt>评估类型：</dt><dd>持续评估（25%）– 资助提案</dd>
+                        <dt>写作任务：</dt><dd>完成一份资助提案申请</dd>
+                        <dt>时长：</dt><dd>仅1小时</dd>
+                        <dt>字数：</dt><dd>250–300字</dd>
+                        <dt>任务目标：</dt><dd>适当地回应职场资助情景</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Key Skills & Assessment Criteria</h2>
+                <div class="zh-label">关键技能与评估标准</div>
+                
+                <div class="project-section" style="margin-top:14px;">
+                    <h3>Key Skills</h3>
+                    <p>Describe, synthesise, organise, explain, persuade and evaluate.</p>
+                    <div class="zh-text">描述、综合、组织、解释、说服及评估。</div>
                 </div>
 
-                <div class="card" style="margin-top:12px;">
-                    <h2>Application Form</h2>
-                    <div class="zh-label">申请表</div>
-                    <table class="form-table" style="margin-top:10px;">
-                        <tr><th colspan="2" style="background:#2980b9; color:white; text-align:center;">Innovation and Technology Commission<br>Funding Scheme for Arts Technology</th></tr>
-                    </table>
-                    <table class="form-table" style="margin-top:10px;">
-                        <tr><th>Name of organisation:</th><td>Dream Art Centre</td></tr>
-                        <tr><th>Address:</th><td>15/F Causeway Bay Plaza 2, 28 Yee Wo Street, Causeway Bay</td></tr>
-                        <tr><th>Contact person:</th><td>Lee Tsz Hon, Alex, assistant stage designer</td></tr>
-                        <tr><th>Office number:</th><td>2468 1357</td></tr>
-                        <tr><th>Email:</th><td>alexlee@dreamart.org.hk</td></tr>
-                    </table>
+                <div class="project-section" style="margin-top:14px;">
+                    <h3>Assessment Criteria</h3>
+                    <p>Task response, organisation, style & register, cohesion, vocabulary and grammar.</p>
+                    <div class="zh-text">任务回应、组织、风格与语域、衔接、词汇及语法。</div>
                 </div>
 
-                <div class="card" style="margin-top:12px;">
-                    <div class="project-section">
-                        <p class="section-label">Organisation Information</p>
-                        <div class="zh-label">机构资料</div>
-                        <p style="border:1px dashed #ccc; padding:12px; color:#ccc; font-style:italic; min-height:60px;">[Describe organisation details]</p>
-                    </div>
-                    <div class="project-section">
-                        <p class="section-label">Project Aim</p>
-                        <div class="zh-label">项目目标</div>
-                        <p style="font-size:0.93em; color:#444;">In light of the increasing integration of technology in the arts, we are planning to upgrade our theatre's lighting and sound systems aimed at enhancing the immersive experience for both performers and audiences.</p>
-                    </div>
-                    <div class="project-section">
-                        <p class="section-label">Project Details</p>
-                        <div class="zh-label">项目详情</div>
-                        <p style="font-size:0.93em; color:#444; margin-bottom:8px;"><strong>a. Implementation</strong></p>
-                        <p style="border:1px dashed #ccc; padding:12px; color:#ccc; font-style:italic; min-height:70px;">[Narrate project implementation]</p>
-                        <p style="font-size:0.93em; color:#444; margin-top:10px; margin-bottom:8px;"><strong>b. Amount of funding requested</strong></p>
-                        <p style="border:1px dashed #ccc; padding:12px; color:#ccc; font-style:italic; min-height:40px;">[Request funding amount]</p>
-                    </div>
-                    <div class="project-section">
-                        <p class="section-label">Justification for Funding</p>
-                        <div class="zh-label">资助理由</div>
-                        <p style="border:1px dashed #ccc; padding:12px; color:#ccc; font-style:italic; min-height:80px;">[Highlight benefits, describe desired results, align with funding body's mission]</p>
-                    </div>
-                    <div class="project-section">
-                        <p class="section-label">Supplementary Information</p>
-                        <div class="zh-label">补充资料</div>
-                        <p style="border:1px dashed #ccc; padding:12px; color:#ccc; font-style:italic; min-height:80px;">[Describe potential concern and propose solution; end the application persuasively]</p>
-                    </div>
+                <div class="project-section" style="margin-top:14px;">
+                    <h3>Information Sources</h3>
+                    <p>Emails, website extracts, meeting notes and handwritten notes.</p>
+                    <div class="zh-text">电邮、网站摘录、会议记录及手写笔记。</div>
                 </div>
 
-                <div class="footer" style="margin-top:14px;">
-                    <span><strong>Submission date:</strong> 16 Dec 202-</span>
-                    <span><strong>Signature:</strong> Alex Lee</span>
+                <div class="project-section" style="margin-top:14px;">
+                    <h3>Assessment Rules</h3>
+                    <p>Follow attendance procedures and device regulations.</p>
+                    <div class="zh-text">请遵守出席程序及设备规例。</div>
                 </div>
             </div>
         </div>
 
         <!-- ==================== TAB 8: Supplementary Notes for CA ==================== -->
         <div class="tab-content" id="tab8">
-            <div class="card">
-                <h2>Follow the 4 Steps to Write Your 25% CA</h2>
-                <div class="zh-label">按照以下四个步骤撰写25%持续评估</div>
-            </div>
-
-            <div class="card">
-                <h2>Step 1: Writing Organisation Information (Unit 2)</h2>
-                <div class="zh-label">第一步：撰写机构资料（单元二）</div>
-                <p>For writing Organisation information, identify key components on the homepage and use the following grammatical structures:</p>
-                <div class="zh-text">撰写机构资料时，请从主页中识别关键信息，并运用以下语法结构：</div>
-                <ul>
-                    <li><strong>Structure 1:</strong> [past participle, "-ed"] + in + Establishment/Founding/Formation year</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>结构一：</strong>[过去分词] + in + 成立/创办年份</li></ul></div>
-                <ul>
-                    <li><strong>Structure 2:</strong> Organization name + is a + [business nature]</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>结构二：</strong>机构名称 + is a + [业务性质]</li></ul></div>
-                <ul>
-                    <li><strong>Structure 3:</strong> specialising in / dedicated to / committed to / devoted to / focusing on + [action / area]</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>结构三：</strong>specialising in / dedicated to / committed to / devoted to / focusing on + [行动/领域]</li></ul></div>
-                <ul>
-                    <li><strong>Structure 4:</strong> Additionally, / Also, + we organize / run / conduct / provide / offer + organization's mission / services / work</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>结构四：</strong>Additionally / Also + we organize / run / conduct / provide / offer + 机构使命/服务</li></ul></div>
-                <ul>
-                    <li><strong>Structure 5:</strong> [to + verb] + purpose of the mission / services / work</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>结构五：</strong>[to + 动词] + 使命/服务的目的</li></ul></div>
-
-                <h3 style="margin-top:14px; color:#1a5276;">Examples / 范例</h3>
-                <div class="project-section">
-                    <p><strong>Example 1 (InnoDesign):</strong> Formed in 2001, InnoDesign is a product design consultancy devoted to offering customised product prototyping services to local and international manufacturers.</p>
-                    <div class="zh-text"><strong>范例一（InnoDesign）：</strong>InnoDesign 成立于2001年，是一间产品设计顾问公司，致力于为本地及国际制造商提供定制产品原型服务。</div>
-                    <p>Also, we host community workshops to engage participants in hands-on product design activities.</p>
-                    <div class="zh-text">此外，我们举办社区工作坊，让参与者亲身参与产品设计活动。</div>
-                </div>
-                <div class="project-section">
-                    <p><strong>Example 2 (StyleScope):</strong> Started in 2020, StyleScope Hong Kong is a fashion media company focusing on publishing fashion and beauty magazines for style enthusiasts.</p>
-                    <div class="zh-text"><strong>范例二（StyleScope）：</strong>StyleScope Hong Kong 成立于2020年，是一间时尚媒体公司，专注于为时尚爱好者出版时装及美容杂志。</div>
-                    <p>Additionally, we run reader engagement campaigns to invite fashion ideas or styling tips from readers.</p>
-                    <div class="zh-text">此外，我们举办读者互动活动，邀请读者分享时尚创意及穿搭贴士。</div>
-                </div>
-                <div class="project-section">
-                    <p><strong>Example 3 (Island Esports):</strong> Established in 2013, Island Esports is a gaming association dedicated to nurturing esports talent in Hong Kong.</p>
-                    <div class="zh-text"><strong>范例三（Island Esports）：</strong>Island Esports 成立于2013年，是一个致力于培养香港电竞人才的电竞协会。</div>
-                    <p>Also, we offer a range of esport games and competitions to nurture positive gaming culture.</p>
-                    <div class="zh-text">此外，我们举办各类电竞游戏及比赛，以培育正面的游戏文化。</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Step 2: Writing Project Details (Unit 3)</h2>
-                <div class="zh-label">第二步：撰写项目详情（单元三）</div>
-                <p>For writing Project details (Implementation + Amount of funding requested), identify duration and action of each phase on Notes of meeting.</p>
-                <div class="zh-text">撰写项目详情（执行计划 + 申请资助金额）时，请从会议记录中识别各阶段的时间及行动。</div>
-
-                <h3 style="margin-top:12px; color:#2980b9;">a. Implementation Formula / 执行计划公式</h3>
-                <ul>
-                    <li>The project will be completed in three stages/phases, each lasting XXX months/weeks.</li>
-                </ul>
-                <div class="zh-text"><ul><li>项目将分三个阶段进行，每阶段为期XXX个月/周。</li></ul></div>
-                <ul>
-                    <li>In phase 1, we will [verb]..., in phase 2, we will [verb]...</li>
-                </ul>
-                <div class="zh-text"><ul><li>在第一阶段，我们将……；在第二阶段，我们将……</li></ul></div>
-                <ul>
-                    <li>In phase 3, / In the final phase, ...</li>
-                </ul>
-                <div class="zh-text"><ul><li>在第三阶段 / 在最后阶段，……</li></ul></div>
-
-                <h3 style="margin-top:12px; color:#2980b9;">b. Amount of Funding Requested Formula / 申请资助金额公式</h3>
-                <ul>
-                    <li>It is estimated that a total of $xxxxx will be required for the project. For details of the breakdown, please refer to the attachment.</li>
-                </ul>
-                <div class="zh-text"><ul><li>项目预计所需资金总额为$xxxxx。详情请参阅附件。</li></ul></div>
-                <ul>
-                    <li>(Alternative) The project is estimated to cost around $xxxxx. The details of the breakdown are attached for your information.</li>
-                </ul>
-                <div class="zh-text"><ul><li>（替代写法）项目预计成本约为$xxxxx。费用明细已附上供参考。</li></ul></div>
-
-                <h3 style="margin-top:14px; color:#1a5276;">Examples / 范例</h3>
-                <div class="project-section">
-                    <p><strong>Example 1 — Film / Drama Project:</strong></p>
-                    <p><strong>a. Implementation:</strong> The project will be completed in three phases, each lasting two months. In phase 1, we will finalise the screenplay and cast suitable actors.</p>
-                    <div class="zh-text"><strong>范例一 — 电影/戏剧项目：</strong></div>
-                    <div class="zh-text"><strong>a. 执行计划：</strong>项目将分三个阶段进行，每阶段为期两个月。在第一阶段，我们将敲定剧本并挑选合适的演员。</div>
-                    <p>In phase 2, necessary filming permits will be obtained before scheduling rehearsals. Filming will also be conducted to capture the scripted scenes.</p>
-                    <div class="zh-text">在第二阶段，将先取得所需的拍摄许可证，再安排排练，并进行拍摄以捕捉剧本中的场景。</div>
-                    <p>In the final phase, we will edit the footage and test the submission entry on multiple devices to ensure technical compatibility.</p>
-                    <div class="zh-text">在最后阶段，我们将剪辑影片，并在多个设备上测试提交条目，以确保技术兼容性。</div>
-                    <p><strong>b. Amount of funding requested:</strong> It is estimated that a total of $1,000,000 will be required for the project. For details of the breakdown, please refer to the attachment.</p>
-                    <div class="zh-text"><strong>b. 申请资助金额：</strong>项目预计所需资金总额为1,000,000港元。详情请参阅附件。</div>
-                </div>
-                <div class="project-section">
-                    <p><strong>Example 2 — Neon Art Exhibition:</strong></p>
-                    <p><strong>a. Implementation:</strong> The project will be executed in three stages, each spanning three weeks. In stage 1, we will send invitations to local neon artists and co-create artworks with them.</p>
-                    <div class="zh-text"><strong>范例二 — 霓虹灯艺术展览：</strong></div>
-                    <div class="zh-text"><strong>a. 执行计划：</strong>项目将分三个阶段进行，每阶段为期三周。在第一阶段，我们将向本地霓虹灯艺术家发出邀请，并与他们共同创作艺术品。</div>
-                    <p>In stage 2, the exhibition will be installed at a public venue. Interactive workshops will also be incorporated.</p>
-                    <div class="zh-text">在第二阶段，展览将在公共场所设置，并加入互动工作坊。</div>
-                    <p>In the final stage, we will conduct random interviews with visitors and collect their feedback to evaluate the project's impact for future development.</p>
-                    <div class="zh-text">在最后阶段，我们将随机访问参观者并收集反馈，以评估项目对未来发展的影响。</div>
-                    <p><strong>b. Amount of funding requested:</strong> The project is estimated to cost around $400,000. The details of the breakdown are attached for your information.</p>
-                    <div class="zh-text"><strong>b. 申请资助金额：</strong>项目预计成本约为400,000港元。费用明细已附上供参考。</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Step 3: Writing Justification for Funding (Unit 4)</h2>
-                <div class="zh-label">第三步：撰写资助理由（单元四）</div>
-                <p>For writing Justification, identify 3 benefits on your handwritten notes. Use the following vocabulary and grammatical structures:</p>
-                <div class="zh-text">撰写资助理由时，请从手写笔记中识别三项益处，并运用以下词汇和语法结构：</div>
-                <ul>
-                    <li><strong>Benefit 1:</strong> The project will + provide / offer / feature / give + [Benefit 1]</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>益处一：</strong>项目将 + 提供/展示/带来 + [益处一]</li></ul></div>
-                <ul>
-                    <li><strong>Elaboration:</strong> verb+ing (e.g. strengthening / encouraging) + [result / elaboration]</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>阐述：</strong>动词+ing（如加强/促进）+ [结果/阐述]</li></ul></div>
-                <ul>
-                    <li><strong>Benefit 2:</strong> Additionally, / Moreover, / In addition, it / the project will + [Benefit 2]</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>益处二：</strong>此外 / 而且 / 与此同时，该项目将 + [益处二]</li></ul></div>
-                <ul>
-                    <li><strong>Elaboration:</strong> which + [result / elaboration]</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>阐述：</strong>which + [结果/阐述]</li></ul></div>
-                <ul>
-                    <li><strong>Alignment with Funder:</strong> Furthermore, / Also, this project's aim closely aligns with / is in line with the mission and values of [funder].</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>与资助方的契合：</strong>再者，本项目的目标与[资助方]的使命及价值观高度契合。</li></ul></div>
-
-                <h3 style="margin-top:14px; color:#1a5276;">Examples / 范例</h3>
-                <div class="project-section">
-                    <p><strong>Example 1 (Creative Industry):</strong> The competition will provide a platform for our emerging creators to showcase their work, strengthening the industry's creative pipeline.</p>
-                    <div class="zh-text"><strong>范例一（创意产业）：</strong>比赛将为新晋创作者提供展示作品的平台，加强业界的创意储备。</div>
-                    <p>In addition, the funding will enable us to secure essential production resources, which helps to ensure high-quality post-production work.</p>
-                    <div class="zh-text">此外，资助将使我们能够获取必要的制作资源，有助于确保高质量的后期制作工作。</div>
-                    <p>Furthermore, the aim of the project closely aligns with the mission of the Cultural and Creative Industries Development Agency. It will contribute greatly to the sustainable growth of Hong Kong's cultural and creative industries.</p>
-                    <div class="zh-text">再者，本项目的目标与创意香港的使命高度契合，将大大促进香港文化创意产业的可持续发展。</div>
-                </div>
-                <div class="project-section">
-                    <p><strong>Example 2 (Neon Art & Heritage):</strong> The neon exhibition will highlight the craftsmanship and cultural significance of neon art, encouraging the public to rediscover this unique visual heritage.</p>
-                    <div class="zh-text"><strong>范例二（霓虹灯艺术与文化遗产）：</strong>霓虹灯展览将突出霓虹灯艺术的工艺及文化意义，鼓励公众重新认识这一独特的视觉遗产。</div>
-                    <p>Local artists will also have a platform to experiment with light-based media, which will foster creative exchange.</p>
-                    <div class="zh-text">本地艺术家亦将获得一个试验光媒体的平台，促进创意交流。</div>
-                    <p>Moreover, the project's aim is in line with the mission and values of the CreateSmart Initiative, resulting in promoting design appreciation and cultural preservation in the community.</p>
-                    <div class="zh-text">此外，本项目的目标与「创意智优计划」的使命及价值观一致，有助促进社区对设计的欣赏及文化保育。</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Step 4: Writing Supplementary Information (Unit 5)</h2>
-                <div class="zh-label">第四步：撰写补充资料（单元五）</div>
-                <p>For writing Supplementary information, identify the possible concern and solution and a concluding remark on your handwritten notes.</p>
-                <div class="zh-text">撰写补充资料时，请从手写笔记中识别可能的关注事项、解决方案及结语。</div>
-                <ul>
-                    <li><strong>1. Acknowledging Concern:</strong> We are aware that / We acknowledge / We understand that there might be concerns about ... [concern]</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>1. 承认关注事项：</strong>我们明白 / 我们理解可能会有……的顾虑</li></ul></div>
-                <ul>
-                    <li><strong>2. Proposing Solution:</strong> However, we will ensure that... / However, please rest assured that we will... [solution]</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>2. 提出解决方案：</strong>然而，我们将确保…… / 请放心，我们将……</li></ul></div>
-                <ul>
-                    <li><strong>3. Concluding Remark:</strong> We are confident that the project / [verb-ing phrase], which [project aim], will [summary of benefits / positive outcome].</li>
-                </ul>
-                <div class="zh-text"><ul><li><strong>3. 结语：</strong>我们坚信，该项目 / [动词+ing短语]，[项目目标]，将[益处/正面成果的总结]。</li></ul></div>
-
-                <h3 style="margin-top:14px; color:#1a5276;">Examples / 范例</h3>
-                <div class="project-section">
-                    <p><strong>Example 1 — Esports Tournament (Technical Server Lag):</strong></p>
-                    <p>We are aware that there might be concerns about technical issues, such as server lag during the tournament. However, please rest assured that we will secure high-performance servers and conduct pre-event stress tests so that a smooth experience for all participants will be guaranteed.</p>
-                    <div class="zh-text"><strong>范例一 — 电竞比赛（服务器延迟技术问题）：</strong></div>
-                    <div class="zh-text">我们明白可能会有技术问题的顾虑，例如比赛期间的服务器延迟。请放心，我们将确保使用高性能服务器，并在活动前进行压力测试，以保证所有参与者享有流畅的体验。</div>
-                    <p>We are confident that organising the esports tournament, which showcases the outstanding performance of local gamers, will foster a positive perception of competitive gaming among the public, gaining more support from society.</p>
-                    <div class="zh-text">我们坚信，举办是次电竞比赛，展示本地电竞选手的出色表现，将促进公众对竞技游戏的正面看法，赢得社会更多支持。</div>
-                </div>
-                <div class="project-section">
-                    <p><strong>Example 2 — EV Charging Station Network (Equipment Safety):</strong></p>
-                    <p>We understand that there might be concerns about the safety of the charging stations. However, we will ensure regular check-ups and maintenance of the charging equipment so that the risk of malfunctions can be minimized.</p>
-                    <div class="zh-text"><strong>范例二 — 电动车充电站网络（设备安全）：</strong></div>
-                    <div class="zh-text">我们理解可能会对充电站的安全性有所顾虑。然而，我们将确保定期检查及保养充电设备，以尽量减低故障风险。</div>
-                    <p>We are confident that installing the EV charging station network, which promotes sustainable transportation and a greener future, will have a significant and far-reaching impact on environmental conservation, promoting the adoption of EVs in the community.</p>
-                    <div class="zh-text">我们坚信，安装电动车充电网络，推动可持续交通及更绿色的未来，将对环保产生深远影响，促进社区采用电动车。</div>
-                </div>
-                <div class="project-section">
-                    <p><strong>Example 3 — Neon Installation Exhibition (Electrical Safety):</strong></p>
-                    <p>We acknowledge that there might be concerns about the safety of neon installations. However, we are committed to ensuring that all artworks comply with electrical safety standards and undergo professional inspection before being displayed in order to minimise risks.</p>
-                    <div class="zh-text"><strong>范例三 — 霓虹灯装置展览（电力安全）：</strong></div>
-                    <div class="zh-text">我们承认可能会对霓虹灯装置的安全性有所顾虑。然而，我们致力于确保所有艺术品符合电力安全标准，并在展出前进行专业检查，以尽量减低风险。</div>
-                    <p>We are confident that the neon exhibition, which supports local creative talent, will generate meaningful cultural impact and inspire interest in preserving the city's design legacy.</p>
-                    <div class="zh-text">我们坚信，支持本地创意人才的霓虹灯展览，将产生有意义的文化影响，并激发人们保存城市设计遗产的兴趣。</div>
-                </div>
-            </div>
+            <article class="sn-sheet">
+  <h1 class="sn-sp-0-40"><span class="sn-c-navy"><b>LAN4103 Supplementary Notes for CA</b></span></h1>
+  <h2 class="sn-sp-280-40"><span class="sn-c-blue"><b>Follow the 4 steps suggested to write your 25% CA -</b></span><span class="sn-c-grey sn-s110"><b><i> Prepared by Nancy and Rebecca</i></b></span></h2>
+  <p class="sn-sp-0-80 sn-legend-head sn-s105"><b>🔑 How to read the colour-coding &amp; symbols in this guide</b></p>
+  <p class="sn-sp-0-40 sn-s105">Each Step below has its own numbered/lettered set of sentence structures (e.g. Structure 1, Structure 2…). The SAME highlight colour is used for a structure box and for the matching phrase in every example that follows it, in this fixed order — so you can trace a colour straight from the formula to the real sentence:</p>
+  <p class="sn-sp-0-80 sn-swatches sn-s105"><span class="sn-h1">1st</span> &nbsp;&nbsp;<span class="sn-h2">2nd</span> &nbsp;&nbsp;<span class="sn-h3">3rd</span> &nbsp;&nbsp;<span class="sn-h4">4th</span> &nbsp;&nbsp;<span class="sn-h5">5th</span> &nbsp;&nbsp;← order of structures/parts in each Step</p>
+  <p class="sn-sp-0-40 sn-s105">On top of the colours, four more marks show four different language skills:</p>
+  <p class="sn-sp-0-40 sn-s105"><b>• Bold</b> = fixed “skeleton” wording — copy this part exactly as it is.</p>
+  <p class="sn-sp-0-40 sn-s105"><i>• Italics</i> = a bank of interchangeable words/phrases — pick ONE option that fits your case.</p>
+  <p class="sn-sp-0-40 sn-s105"><u>• </u><b><u>Bold + underline</u></b> = a linking/transition or sequencing word (e.g. Additionally, However, In phase 1,) — these connect your ideas and can be reused in any similar report.</p>
+  <p class="sn-sp-0-120 sn-s105">• Plain (highlighted but not bold/italic/underlined) = the specific content you write yourself for your own project (names, numbers, benefits, concerns, etc.).</p>
+  <p class="sn-sp-0-200 sn-s105"><i>Tip: cover the examples and try to rebuild each sentence using only the colour + bold/italic/underline cues in the structure box — that is the fastest way to revise.</i></p>
+  <h3 class="sn-sp-240-60"><span class="sn-c-navy"><b>Step 1: </b></span><span class="sn-c-steel"><b>Writing Organisation Information</b></span><span class="sn-c-grey sn-s140"><i> (Unit 2)</i></span></h3>
+  <p class="sn-sp-0-80 sn-intro sn-s120">For writing Organisation information (Unit 2), identify key components on the homepage and use the following grammatical structures:</p>
+  <section class="sn-box sn-struct" aria-label="Sentence structures">
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h1"><b>• Structure 1: </b>[past participle, "-ed"] + <b>in</b> + Establishment/Founding/Formation year</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h2"><b>• Structure 2: </b>Organization name + <b>is a</b> + [business nature]</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h3 sn-w"><b>• </b></span><span class="sn-h3"><b>Structure 3: </b><i>specialising in / dedicated to / committed to / devoted to / focusing on</i> + [action / area]</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h4 sn-w"><b>• Structure 4: </b><i><u>Additionally, / Also,</u></i> + we <i>organize / run / conduct / provide / offer</i> (v.) + organization's mission / services / work</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h5 sn-w"><b>• Structure 5: [to + verb]</b> + purpose of the mission / services / work</span></p>
+  </section>
+  <p class="sn-sp-120-40 sn-label"><b>Read the following examples:</b></p>
+  <section class="sn-box sn-examples" aria-label="Worked examples">
+    <p class="sn-sp-0-60 sn-s105"><b>Example 1 (InnoDesign): </b><span class="sn-h1">Formed <b>in</b> 2001</span>, <span class="sn-h2">InnoDesign <b>is a</b> product design consultancy </span><span class="sn-h3"><i>devoted to</i> offering customised product prototyping services to local and international manufacturers</span>. <span class="sn-h4 sn-w"><i><u>Also,</u></i> we <i>host</i> community workshops </span><span class="sn-h5 sn-w"><b>to</b> engage participants in hands-on product design activities</span><span class="sn-ghost">.</span></p>
+    <p class="sn-sp-0-60 sn-s105"><b>Example 2 (StyleScope): </b><span class="sn-h1">Started <b>in</b> 2020</span>, <span class="sn-h2">StyleScope Hong Kong <b>is a</b> fashion media company </span><span class="sn-h3"><i>focusing on</i> publishing fashion and beauty magazines for style enthusiasts</span>. <span class="sn-h4 sn-w"><i><u>Additionally,</u></i> we <i>run</i> reader engagement campaigns </span><span class="sn-h5 sn-w"><b>to</b> invite fashion ideas or styling tips from readers</span><span class="sn-ghost">.</span></p>
+    <p class="sn-sp-0-60 sn-s105"><b>Example 3 (Island Esports): </b><span class="sn-h1">Established/Founded <b>in</b> 2013</span>, <span class="sn-h2">Island Esports <b>is a</b> gaming association </span><span class="sn-h3"><i>dedicated to</i> nurturing esports talent in Hong Kong</span>. <span class="sn-h4 sn-w"><i><u>Also,</u></i> we <i>offer</i> a range of esport games and competitions </span><span class="sn-h5 sn-w"><b>to</b> nurture positive gaming culture</span><span class="sn-ghost">.</span></p>
+  </section>
+  <h3 class="sn-sp-240-60"><span class="sn-c-navy"><b>Step 2: </b></span><span class="sn-c-steel"><b>Writing Project Details (Implementation + Amount of Funding Requested)</b></span><span class="sn-c-grey sn-s140"><i> (Unit 3)</i></span></h3>
+  <p class="sn-sp-0-80 sn-intro sn-s120">For writing Project details (Implementation + Amount of funding requested) (Unit 3), identify duration and action of each phase on Notes of meeting. Use the following vocabulary and grammatical structures:</p>
+  <section class="sn-box sn-struct" aria-label="Sentence structures">
+    <p class="sn-sp-0-40 sn-s105"><b>a. Implementation Formula:</b><br><span class="sn-h1">• The project <b>will be completed in</b> three stages/phases, each lasting XXX months/weeks.</span><br>• <span class="sn-h2"><b><u>In phase 1,</u></b> we will [verb]..., <b><u>in phase 2,</u></b> we will [verb]... &nbsp;OR</span><br><span class="sn-h2"><i>• </i><b><i><u>In phase 1,</u></i></b><i> ... will be [+ p.p.]. </i><b><i><u>In phase 2,</u></i></b><i> ... will be [+ p.p.]</i></span><br>• <span class="sn-h2"><b><u>In phase 3,</u></b> / <b><u>In the final phase,</u></b> ...</span></p>
+    <p class="sn-sp-0-40 sn-s105"><b>b. Amount of Funding Requested Formula:</b><br><span class="sn-h3">• <b>It is estimated that a total of $xxxxx will be required for the project.</b> For details of the breakdown of the costs, please refer to the attachment.</span><br><span class="sn-h3"><i>• (Alternative) </i><b><i>The project is estimated to cost around $xxxxx.</i></b><i> The details of the breakdown are attached for your information.</i></span></p>
+  </section>
+  <p class="sn-sp-120-40 sn-label"><b>Read the following examples:</b></p>
+  <section class="sn-box sn-examples" aria-label="Worked examples">
+    <p class="sn-sp-0-60 sn-s105"><b>Example 1 — Film / Drama Project:</b><br><b>a. Implementation:</b><br><span class="sn-h1">The project <b>will be completed in</b> three phases, each lasting two months. </span><span class="sn-h2"><b><u>In phase 1,</u></b> we will finalise the screenplay and cast suitable actors. <b><u>In phase 2,</u></b> necessary filming permits will be obtained before scheduling rehearsals. Filming will also be conducted to capture the scripted scenes. <b><u>In the final phase,</u></b> we will edit the footage and test the submission entry on multiple devices to ensure technical compatibility.</span><br><br><b>b. Amount of funding requested:</b><br><span class="sn-h3"><b>It is estimated that a total of $1,000,000 will be required for the project.</b> For details of the breakdown, please refer to the attachment.</span></p>
+    <p class="sn-sp-0-60 sn-s105"><b>Example 2 — Neon Art Exhibition:</b><br><b>a. Implementation:</b><br><span class="sn-h1">The project <b>will be executed in</b> three stages, each spanning three weeks. </span><span class="sn-h2"><b><u>In stage 1,</u></b> we will send invitations to local neon artists and co-create artworks with them. <b><u>In stage 2,</u></b> the exhibition will be installed at a public venue. Interactive workshops will also be incorporated. <b><u>In the final stage,</u></b> we will conduct random interviews with visitors and collect their feedback to evaluate the project's impact for future development.</span><br><br><b>b. Amount of funding requested:</b><br><span class="sn-h3"><b>The project is estimated to cost around $400,000.</b> The details of the breakdown are attached for your information.</span></p>
+  </section>
+  <h3 class="sn-sp-240-60"><span class="sn-c-navy"><b>Step 3: </b></span><span class="sn-c-steel"><b>Writing Justification for Funding</b></span><span class="sn-c-grey sn-s140"><i> (Unit 4)</i></span></h3>
+  <p class="sn-sp-0-80 sn-intro sn-s120">For writing Justification (Unit 4), identify 3 benefits on Your handwritten notes. Use the following vocabulary and grammatical structures:</p>
+  <section class="sn-box sn-struct" aria-label="Sentence structures">
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h1"><b>1. Benefit 1: </b>The project will + <i>provide / offer / feature / give</i> (v.) + [Benefit 1].</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h2"><b>2. Elaboration on Benefit 1: </b>verb+ing (e.g. <i>strengthening / encouraging</i>) + [result / elaboration on Benefit 1]</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h3"><b>3. Benefit 2: </b><i><u>Additionally, / Moreover, / In addition,</u></i> it / the project / participants will + [Benefit 2],</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h4 sn-w"><b>4. Elaboration on Benefit 2: which</b> + [result / elaboration on Benefit 2]</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h5 sn-w"><b>5. Alignment with Funder: </b><i><u>Furthermore, / In addition, / Also,</u></i> this project's aim <i>shares/ closely aligns with / is in line with</i> the mission and values of [funder]. <b>It will...</b><i> (Tip: Avoid repeating "will" — use: contributing to, resulting in, leading to, enabling, fostering + verb-ing...)</i></span></p>
+  </section>
+  <p class="sn-sp-120-40 sn-label"><b>Read the following examples:</b></p>
+  <section class="sn-box sn-examples" aria-label="Worked examples">
+    <p class="sn-sp-0-60 sn-s105"><b>Example 1 (Creative Industry):</b><br><span class="sn-h1">The competition <b>will </b><i>provide</i> a platform for our emerging creators to showcase their work</span>, <span class="sn-h2"><i>strengthening</i> the industry's creative pipeline</span>. <span class="sn-h3"><i><u>In addition,</u></i> the funding will enable us to secure essential production resources</span>, <span class="sn-h4 sn-w"><b>which</b> helps to ensure high-quality post-production work</span><span class="sn-ghost">. </span><span class="sn-h5 sn-w"><i><u>Furthermore,</u></i> the aim of the project <i>closely aligns with</i> the mission of the Cultural and Creative Industries Development Agency. <b>It will</b> contribute greatly to the sustainable growth of Hong Kong's cultural and creative industries.</span></p>
+    <p class="sn-sp-0-60 sn-s105"><b>Example 2 (Neon Art &amp; Heritage):</b><br><span class="sn-h1">The neon exhibition <b>will</b> highlight the craftsmanship and cultural significance of neon art</span>, <span class="sn-h2"><i>encouraging</i> the public to rediscover this unique visual heritage</span>. <span class="sn-h3"><i><u>Local artists will also</u></i> have a platform to experiment with light-based media</span>, <span class="sn-h4 sn-w"><b>which</b> will foster creative exchange</span><span class="sn-ghost">. </span><span class="sn-h5 sn-w"><i><u>Moreover,</u></i> the project's aim <i>is in line with</i> the mission and values of the CreateSmart Initiative, <b>resulting in</b> promoting design appreciation and cultural preservation in the community.</span></p>
+  </section>
+  <h3 class="sn-sp-240-60"><span class="sn-c-navy"><b>Step 4: </b></span><span class="sn-c-steel"><b>Writing Supplementary Information (Concerns, Solutions &amp; Conclusion)</b></span><span class="sn-c-grey sn-s140"><i> (Unit 5)</i></span></h3>
+  <p class="sn-sp-0-80 sn-intro sn-s120">For writing Supplementary information (Unit 5), identify the possible concern and solution and a concluding remark on Your handwritten notes. Then, identify the project aim on Notes of meeting to write a concluding remark. Use the following vocabulary and grammatical structures:</p>
+  <section class="sn-box sn-struct" aria-label="Sentence structures">
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h1"><b>1. Acknowledging Concern: </b><i><u>We are aware that / We acknowledge / We understand that</u></i> there might be concerns about ... [concern]</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h2"><b>2. Proposing Solution: </b><i><u>However,</u></i> we will ensure that... / <i><u>However,</u></i> please rest assured that we will... [solution]</span></p>
+    <p class="sn-sp-0-40 sn-s105"><span class="sn-h3"><b>3. Concluding Remark Formula: We are confident that</b> the project / [verb-ing phrase], <b>which</b> [project aim], will [summary of benefits / positive outcome].</span></p>
+  </section>
+  <p class="sn-sp-120-40 sn-label"><b>Read the following examples:</b></p>
+  <section class="sn-box sn-examples" aria-label="Worked examples">
+    <p class="sn-sp-0-60 sn-s105"><b>Example 1 — Esports Tournament (Technical Server Lag):</b><br><span class="sn-h1"><i><u>We are aware that</u></i> there might be concerns about technical issues, such as server lag during the tournament.</span> <span class="sn-h2"><i><u>However,</u></i> please rest assured that we will secure high-performance servers and conduct pre-event stress tests so that a smooth experience for all participants will be guaranteed.</span><br><br><span class="sn-h3"><b>We are confident that</b> organising the esports tournament, <b>which</b> showcases the outstanding performance of local gamers, will foster a positive perception of competitive gaming among the public, gaining more support from society.</span></p>
+    <p class="sn-sp-0-60 sn-s105"><b>Example 2 — EV Charging Station Network (Equipment Safety):</b><br><span class="sn-h1"><i><u>We understand that</u></i> there might be concerns about the safety of the charging stations.</span> <span class="sn-h2"><i><u>However,</u></i> we will ensure regular check-ups and maintenance of the charging equipment so that the risk of malfunctions can be minimized.</span><br><br><span class="sn-h3"><b>We are confident that</b> installing the EV charging station network, <b>which</b> promotes sustainable transportation and a greener future, will have a significant and far-reaching impact on environmental conservation, promoting the adoption of EVs in the community.</span></p>
+    <p class="sn-sp-0-60 sn-s105"><b>Example 3 — Neon Installation Exhibition (Electrical Safety):</b><br><span class="sn-h1"><i><u>We acknowledge that</u></i> there might be concerns about the safety of neon installations.</span> <span class="sn-h2"><i><u>However,</u></i> we are committed to ensuring that all artworks comply with electrical safety standards and undergo professional inspection before being displayed in order to minimise risks.</span><br><br><span class="sn-h3"><b>We are confident that</b> the neon exhibition, <b>which</b> supports local creative talent, will generate meaningful cultural impact and inspire interest in preserving the city's design legacy.</span></p>
+  </section>
+            </article>
         </div>
 
+        <!-- ==================== TAB 9: CA Funding Proposal Guided Template ==================== -->
+        <div class="tab-content" id="tab9">
+            <div class="gt-root">
+      <header class="gt-header">
+        <h1>LAN4103 Continuous Assessment: Funding Proposal</h1>
+        <p>Interactive Fill-in-the-Blanks Template & Language Skills Guide</p>
+      </header>
+
+      <div class="gt-toolbar">
+        <button class="gt-btn" onclick="window.print()">Print / Export Worksheet</button>
+        <button class="gt-btn gt-secondary" onclick="gtToggleHints()">Toggle Grammar Hints</button>
+        <button class="gt-btn gt-secondary" onclick="gtClearAll()">Clear All Fields</button>
+        <button class="gt-btn gt-secondary" onclick="gtCopyPreview()">Copy Completed Proposal</button>
+      </div>
+
+      <!-- STEP 1 -->
+      <section class="gt-card">
+        <div class="gt-card-header">
+          <div class="gt-card-title">Step 1: Organisation Information (Unit 2)</div>
+          <span class="gt-source-badge">Source: Organisation Homepage</span>
+        </div>
+        <div class="gt-prompt-block">
+          Formula: [Past participle, "-ed"] + in + [Year], [Organisation name] + is a/an + [business nature] + [specialisation participle] + [core area]. Additionally, we + [verb] + [services] to + [purpose].
+        </div>
+        <div class="gt-template-text">
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b1" placeholder="e.g. Formed / Established" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(1) Past participle, "-ed"</span>
+          </span>
+          in 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b2" placeholder="e.g. 2013" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(2) Founding year</span>
+          </span>, 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b3" placeholder="e.g. InnoDesign" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(3) Organisation name</span>
+          </span>
+          is a/an 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b4" placeholder="e.g. product design consultancy" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(4) Business nature</span>
+          </span>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b5" placeholder="e.g. devoted to / dedicated to" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(5) Specialising in / devoted to</span>
+          </span>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b6" placeholder="e.g. offering prototyping services" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(6) Core expertise (verb-ing / noun)</span>
+          </span>.
+          <br><br>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b7" placeholder="e.g. Additionally, / Also," oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(7) Transition</span>
+          </span>
+          we 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b8" placeholder="e.g. host / run / offer" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(8) Active service verb</span>
+          </span>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b9" placeholder="e.g. community workshops" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(9) Regular services/events</span>
+          </span>
+          to 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b10" placeholder="e.g. engage participants in design activities" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(10) Purpose (base verb + object)</span>
+          </span>.
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="gt-card">
+        <div class="gt-card-header">
+          <div class="gt-card-title">Step 2: Project Details (Unit 3)</div>
+          <span class="gt-source-badge">Source: Notes of Meeting</span>
+        </div>
+        <div class="gt-prompt-block">
+          Identify durations and actions for each phase, followed by the passive total cost formula.
+        </div>
+        <div class="gt-template-text">
+          <strong>a. Implementation:</strong><br>
+          The project will be completed in 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b11" placeholder="e.g. three phases" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(11) Stages / phases</span>
+          </span>, 
+          each 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b12" placeholder="e.g. lasting / spanning" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(12) lasting / spanning</span>
+          </span>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b13" placeholder="e.g. two months" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(13) Duration</span>
+          </span>. 
+          In 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b14" placeholder="e.g. phase 1" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(14) Phase 1 / Stage 1</span>
+          </span>, 
+          we will 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b15" placeholder="e.g. finalise the screenplay and cast actors" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(15) Phase 1 action (base verb)</span>
+          </span>. 
+          In 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b16" placeholder="e.g. phase 2" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(16) Phase 2 / Stage 2</span>
+          </span>, 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b17" placeholder="e.g. filming permits will be obtained" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(17) Phase 2 action (passive: will be + p.p.)</span>
+          </span>. 
+          Furthermore, 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b18" placeholder="e.g. rehearsals will be scheduled" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(18) Additional action (passive)</span>
+          </span>. 
+          In 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b19" placeholder="e.g. the final phase" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(19) The final phase / stage</span>
+          </span>, 
+          we will 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b20" placeholder="e.g. edit the footage and test submissions" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(20) Final phase action</span>
+          </span>
+          to 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b21" placeholder="e.g. ensure technical compatibility" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(21) Purpose (base verb)</span>
+          </span>.
+          <br><br>
+          <strong>b. Amount of Funding Requested:</strong><br>
+          It is estimated that a total of 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b22" placeholder="e.g. $1,000,000" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(22) Total funding amount (HK$)</span>
+          </span> 
+          will be required for the project. For details of the breakdown of the costs, please refer to the attachment.
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="gt-card">
+        <div class="gt-card-header">
+          <div class="gt-card-title">Step 3: Justification for Funding (Unit 4)</div>
+          <span class="gt-source-badge">Source: Handwritten Notes (3 Benefits)</span>
+        </div>
+        <div class="gt-prompt-block">
+          Present 3 distinct benefits with non-finite verb-ing phrases, relative clauses, and alignment with the funding scheme.
+        </div>
+        <div class="gt-template-text">
+          The project will 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b23" placeholder="e.g. provide / offer / feature" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(23) provide / offer / feature</span>
+          </span>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b24" placeholder="e.g. a platform for emerging creators" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(24) Benefit 1 (output)</span>
+          </span>, 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b25" placeholder="e.g. strengthening / encouraging" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(25) verb-ing participle</span>
+          </span>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b26" placeholder="e.g. the industry's creative pipeline" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(26) Elaboration / broader impact</span>
+          </span>.
+          <br><br>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b27" placeholder="e.g. In addition, / Additionally," oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(27) Linking adverb</span>
+          </span>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b28" placeholder="e.g. the funding / participants" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(28) Subject</span>
+          </span>
+          will 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b29" placeholder="e.g. enable us to secure essential resources" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(29) Benefit 2</span>
+          </span>, 
+          which 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b30" placeholder="e.g. helps to ensure high-quality production" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(30) Relative clause elaboration (which + verb)</span>
+          </span>.
+          <br><br>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b31" placeholder="e.g. Furthermore, / Moreover," oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(31) Transition</span>
+          </span>
+          the aim of the project 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b32" placeholder="e.g. closely aligns with / is in line with" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(32) Alignment verb phrase</span>
+          </span>
+          the mission and values of 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b33" placeholder="e.g. the CreateSmart Initiative" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(33) Funding body / scheme name</span>
+          </span>. 
+          It will 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b34" placeholder="e.g. contribute greatly to / result in" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(34) Impact participle (contribute to / foster)</span>
+          </span>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b35" placeholder="e.g. the sustainable growth of local industries" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(35) Long-term community impact</span>
+          </span>.
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="gt-card">
+        <div class="gt-card-header">
+          <div class="gt-card-title">Step 4: Supplementary Information & Conclusion (Unit 5)</div>
+          <span class="gt-source-badge">Source: Handwritten Notes & Meeting Notes</span>
+        </div>
+        <div class="gt-prompt-block">
+          Acknowledge concerns professionally, propose a concrete counter-measure, and conclude with a forward-looking summary.
+        </div>
+        <div class="gt-template-text">
+          We 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b36" placeholder="e.g. are aware that / acknowledge" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(36) are aware / acknowledge</span>
+          </span>
+          there might be concerns about 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b37" placeholder="e.g. technical issues such as server lag" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(37) Potential concern / risk</span>
+          </span>. 
+          However, 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b38" placeholder="e.g. please rest assured that we will" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(38) Reassurance phrase</span>
+          </span>
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b39" placeholder="e.g. conduct pre-event stress tests" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(39) Solution / countermeasure</span>
+          </span>
+          so that / in order to 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b40" placeholder="e.g. a smooth experience will be guaranteed" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(40) Intended safeguard / outcome</span>
+          </span>.
+          <br><br>
+          We are confident that 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b41" placeholder="e.g. organising the esports tournament" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(41) Project action (verb-ing phrase / noun)</span>
+          </span>, 
+          which 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b42" placeholder="e.g. showcases outstanding local talent" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(42) Project aim (from meeting notes)</span>
+          </span>, 
+          will 
+          <span class="gt-blank-wrapper">
+            <input class="gt-blank-input" id="gt-b43" placeholder="e.g. foster positive perception among the public" oninput="gtUpdatePreview()">
+            <span class="gt-blank-hint">(43) Summary of positive outcome</span>
+          </span>.
+        </div>
+      </section>
+
+      <!-- LIVE PREVIEW SECTION -->
+      <section class="gt-card" id="gt-preview-section">
+        <div class="gt-card-header">
+          <div class="gt-card-title">Live Preview: Generated Funding Proposal</div>
+          <span class="gt-source-badge">Real-time Student Preview</span>
+        </div>
+        <div class="gt-live-preview-box" id="gt-proposal-output">Fill in the fields above to see your complete funding proposal text generated here in real-time...</div>
+      </section>
+
+      <!-- SUMMARY CHECKLIST -->
+      <section class="gt-card">
+        <div class="gt-card-header">
+          <div class="gt-card-title">Summary Checklist for Students</div>
+          <span class="gt-source-badge">Assessment Matrix</span>
+        </div>
+        <table class="gt-table">
+          <thead>
+            <tr>
+              <th>Blank Numbers</th>
+              <th>Target Grammar & Language Skill</th>
+              <th>Source Stimulus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>(1) – (10)</td>
+              <td>Past participle founding clauses, specialized adjectives, and infinitive of purpose</td>
+              <td>Homepage</td>
+            </tr>
+            <tr>
+              <td>(11) – (21)</td>
+              <td>Future passive (will be + p.p.), active stage sequencing, and purpose clauses</td>
+              <td>Notes of Meeting</td>
+            </tr>
+            <tr>
+              <td>(22)</td>
+              <td>Passive cost estimation and reference to attachments</td>
+              <td>Notes of Meeting</td>
+            </tr>
+            <tr>
+              <td>(23) – (30)</td>
+              <td>Participial clauses (-ing) and non-defining relative clauses (which + verb)</td>
+              <td>Handwritten Notes</td>
+            </tr>
+            <tr>
+              <td>(31) – (35)</td>
+              <td>Alignment verbs & prepositional participles (contributing to / resulting in)</td>
+              <td>Handwritten Notes / Funder Info</td>
+            </tr>
+            <tr>
+              <td>(36) – (40)</td>
+              <td>Concession & reassurance signaling (However, please rest assured that...)</td>
+              <td>Handwritten Notes</td>
+            </tr>
+            <tr>
+              <td>(41) – (43)</td>
+              <td>Gerund subject + embedded relative clause (which...) + modal prediction</td>
+              <td>Meeting Notes + Handwritten Notes</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1251,9 +1577,67 @@
             document.body.classList.toggle('hide-zh', !showZh);
         }
         function switchTab(idx) {
+            document.body.setAttribute('data-tab', idx);   // lets print styles target the active tab
             document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
-            document.querySelectorAll('.tab-content').forEach((c, i) => c.classList.toggle('active', i === idx));
+            document.querySelectorAll('.tab-content').forEach((c) => c.classList.toggle('active', c.id === 'tab' + idx));
         }
+
+    </script>
+
+    <script>
+        /* CA Funding Proposal Guided Template (tab 9) */
+  function gtV(id, placeholder) {
+    var val = document.getElementById(id).value.trim();
+    return val ? val : "[" + placeholder + "]";
+  }
+
+  function gtUpdatePreview() {
+    var text = "";
+    
+    // Step 1
+    text += "1. Organisation Information\n";
+    text += gtV("gt-b1", "Formed") + " in " + gtV("gt-b2", "Year") + ", " + gtV("gt-b3", "Organisation Name") + " is a/an " + gtV("gt-b4", "business nature") + " " + gtV("gt-b5", "devoted to") + " " + gtV("gt-b6", "core expertise") + ". " + gtV("gt-b7", "Additionally,") + " we " + gtV("gt-b8", "host") + " " + gtV("gt-b9", "services") + " to " + gtV("gt-b10", "purpose") + ".\n\n";
+
+    // Step 2
+    text += "2. Project Details (Implementation & Funding Requested)\n";
+    text += "The project will be completed in " + gtV("gt-b11", "three phases") + ", each " + gtV("gt-b12", "lasting") + " " + gtV("gt-b13", "duration") + ". In " + gtV("gt-b14", "phase 1") + ", we will " + gtV("gt-b15", "phase 1 action") + ". In " + gtV("gt-b16", "phase 2") + ", " + gtV("gt-b17", "action will be conducted") + ". Furthermore, " + gtV("gt-b18", "additional action") + ". In " + gtV("gt-b19", "the final phase") + ", we will " + gtV("gt-b20", "final action") + " to " + gtV("gt-b21", "purpose") + ".\n\n";
+    text += "It is estimated that a total of " + gtV("gt-b22", "$XXX,XXX") + " will be required for the project. For details of the breakdown of the costs, please refer to the attachment.\n\n";
+
+    // Step 3
+    text += "3. Justification for Funding\n";
+    text += "The project will " + gtV("gt-b23", "provide") + " " + gtV("gt-b24", "Benefit 1") + ", " + gtV("gt-b25", "strengthening") + " " + gtV("gt-b26", "broader impact") + ". " + gtV("gt-b27", "In addition,") + " " + gtV("gt-b28", "the funding") + " will " + gtV("gt-b29", "Benefit 2") + ", which " + gtV("gt-b30", "helps to ensure outcome") + ". " + gtV("gt-b31", "Furthermore,") + " the aim of the project " + gtV("gt-b32", "closely aligns with") + " the mission and values of " + gtV("gt-b33", "Funder") + ". It will " + gtV("gt-b34", "contribute to") + " " + gtV("gt-b35", "long-term impact") + ".\n\n";
+
+    // Step 4
+    text += "4. Supplementary Information & Conclusion\n";
+    text += "We " + gtV("gt-b36", "are aware that") + " there might be concerns about " + gtV("gt-b37", "potential concern") + ". However, " + gtV("gt-b38", "please rest assured that we will") + " " + gtV("gt-b39", "solution") + " so that " + gtV("gt-b40", "safeguard") + ".\n\n";
+    text += "We are confident that " + gtV("gt-b41", "organising the project") + ", which " + gtV("gt-b42", "project aim") + ", will " + gtV("gt-b43", "summary of positive outcome") + ".";
+
+    document.getElementById("gt-proposal-output").innerText = text;
+  }
+
+  function gtToggleHints() {
+    var hints = document.querySelectorAll('.gt-blank-hint');
+    hints.forEach(function(h) {
+      h.style.display = (h.style.display === 'none') ? 'block' : 'none';
+    });
+  }
+
+  function gtClearAll() {
+    if (confirm("Are you sure you want to clear all fields?")) {
+      var inputs = document.querySelectorAll('.gt-blank-input');
+      inputs.forEach(function(i) { i.value = ""; });
+      gtUpdatePreview();
+    }
+  }
+
+  function gtCopyPreview() {
+    var text = document.getElementById("gt-proposal-output").innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      alert("Completed proposal copied to clipboard!");
+    }, function() {
+      alert("Unable to copy automatically. Please select the text manually.");
+    });
+  }
     </script>
 </body>
 </html>
